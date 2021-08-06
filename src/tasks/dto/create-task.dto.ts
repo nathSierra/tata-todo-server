@@ -1,5 +1,6 @@
 export class CreateTaskDto {
+  id: string;
   name: string;
-  difficulty: number;
   description: string;
+  difficulty: number;
 }
