@@ -5,12 +5,12 @@ export class Task {
   @PrimaryGeneratedColumn()
   id: string;
 
-  @Column({ length: 500 })
+  @Column()
   name: string;
 
-  @Column('text')
+  @Column()
   description: string;
 
-  @Column('int')
+  @Column()
   difficulty: number;
 }
