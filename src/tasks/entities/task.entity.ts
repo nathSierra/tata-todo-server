@@ -2,7 +2,7 @@ import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Task {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column()
@@ -13,4 +13,7 @@ export class Task {
 
   @Column()
   difficulty: number;
+
+  @Column({ default: false })
+  isCompleted: boolean;
 }

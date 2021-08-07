@@ -12,6 +12,7 @@ export class TasksService {
     private taskRepository: Repository<Task>,
   ) {}
   create(createTaskDto: CreateTaskDto) {
+    console.info(createTaskDto);
     return this.taskRepository.save(createTaskDto);
   }
 
