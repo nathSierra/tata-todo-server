@@ -1,9 +1,9 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryColumn } from 'typeorm';
 
 @Entity()
 export class Task {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryColumn()
+  id: string;
 
   @Column()
   name: string;
@@ -16,4 +16,10 @@ export class Task {
 
   @Column({ default: false })
   isCompleted: boolean;
+
+  @Column({ default: null })
+  groupID: string;
+
+  @Column({ default: null })
+  userID: string;
 }

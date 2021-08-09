@@ -3,7 +3,7 @@ import { UpdateTaskDto } from './dto/update-task.dto';
 
 import { Injectable, Inject } from '@nestjs/common';
 import { Repository } from 'typeorm';
-import { Task } from './entities/task.entity';
+import { Task } from './task.entity';
 
 @Injectable()
 export class TasksService {
@@ -17,20 +17,19 @@ export class TasksService {
   }
 
   findAll(): Promise<Task[]> {
-    console.log('something happens');
     console.log(this.taskRepository.find());
     return this.taskRepository.find();
   }
 
-  findOne(id: number) {
+  findOne(id: string) {
     return `This action returns a #${id} task`;
   }
 
-  update(id: number, updateTaskDto: UpdateTaskDto) {
+  update(id: string, updateTaskDto: UpdateTaskDto) {
     return `This action updates a #${id} task`;
   }
 
-  remove(id: number) {
+  remove(id: string) {
     return `This action removes a #${id} task`;
   }
 }
