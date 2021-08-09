@@ -3,8 +3,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Connection } from 'typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { User } from './users/user.entity';
-import { UsersModule } from './users/users.module';
+import { Account } from './accounts/account.entity';
+import { AccountsModule } from './accounts/accounts.module';
 import { TasksModule } from './tasks/tasks.module';
 import { Task } from './tasks/task.entity';
 import { AuthModule } from './auth/auth.module';
@@ -18,11 +18,11 @@ import { AuthModule } from './auth/auth.module';
       username: 'nathan',
       password: 'flareon',
       database: 'tata-db',
-      entities: [User, Task],
+      entities: [Account, Task],
       synchronize: false,
     }),
     AuthModule,
-    UsersModule,
+    AccountsModule,
     TasksModule,
   ],
   controllers: [AppController],
