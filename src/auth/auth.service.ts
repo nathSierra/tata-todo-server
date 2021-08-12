@@ -7,9 +7,7 @@ export class AuthService {
   constructor(
     private usersService: AccountsService,
     private jwtService: JwtService,
-  ) {
-    console.info('we construct?');
-  }
+  ) {}
 
   async validateUser(username: string, pass: string): Promise<any> {
     console.info(username, pass);

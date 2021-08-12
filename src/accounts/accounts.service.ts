@@ -12,7 +12,24 @@ export class AccountsService {
     private accountsRepository: Repository<Account>,
   ) {}
 
-  create(createAccountDto: CreateAccountDto) {
+  async create(createAccountDto: CreateAccountDto) {
+    const { username, email } = createAccountDto;
+
+    const foundUsername = await this.accountsRepository.findOne({
+      where: { username },
+    });
+
+    console.info(foundUsername);
+    if (foundUsername) {
+      return { errors: 'Username taken' };
+    }
+    const foundEmail = await this.accountsRepository.findOne({
+      where: { email },
+    });
+    if (foundEmail) {
+      return { errors: 'Email taken' };
+    }
+
     return this.accountsRepository.save(createAccountDto);
   }
 
