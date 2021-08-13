@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { CreateAccountDto } from './dto/create-account.dto';
 import { UpdateAccountDto } from './dto/update-account.dto';
 import { Account } from './account.entity';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class AccountsService {
@@ -11,15 +12,13 @@ export class AccountsService {
     @InjectRepository(Account)
     private accountsRepository: Repository<Account>,
   ) {}
-
+  saltOrRounds = 10;
   async create(createAccountDto: CreateAccountDto) {
-    const { username, email } = createAccountDto;
+    const { username, email, password } = createAccountDto;
 
     const foundUsername = await this.accountsRepository.findOne({
       where: { username },
     });
-
-    console.info(foundUsername);
     if (foundUsername) {
       return { errors: 'Username taken' };
     }
@@ -30,7 +29,11 @@ export class AccountsService {
       return { errors: 'Email taken' };
     }
 
-    return this.accountsRepository.save(createAccountDto);
+    const hashed_password = await bcrypt.hash(password, this.saltOrRounds);
+    return this.accountsRepository.save({
+      ...createAccountDto,
+      password: hashed_password,
+    });
   }
 
   findAll(): Promise<Account[]> {
