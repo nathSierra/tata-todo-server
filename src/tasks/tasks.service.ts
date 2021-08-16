@@ -17,7 +17,6 @@ export class TasksService {
   }
 
   findAll(): Promise<Task[]> {
-    console.log(this.taskRepository.find());
     return this.taskRepository.find();
   }
 
@@ -29,7 +28,8 @@ export class TasksService {
     return `This action updates a #${id} task`;
   }
 
-  remove(id: string) {
-    return `This action removes a #${id} task`;
+  async delete(id: string) {
+    // console.info(this.taskRepository.delete(id));
+    return await this.taskRepository.delete(id);
   }
 }
