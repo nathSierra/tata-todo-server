@@ -4,4 +4,5 @@ export class CreateTaskDto {
   description: string;
   difficulty: number;
   isCompleted: boolean;
+  teamID: string;
 }

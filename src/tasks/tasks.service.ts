@@ -4,6 +4,7 @@ import { UpdateTaskDto } from './dto/update-task.dto';
 import { Injectable, Inject } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { Task } from './task.entity';
+import { ReadTaskDto } from './dto/read-task.dto';
 
 @Injectable()
 export class TasksService {
@@ -16,8 +17,24 @@ export class TasksService {
     return this.taskRepository.save(createTaskDto);
   }
 
-  findAll(): Promise<Task[]> {
-    return this.taskRepository.find();
+  // findAll(): Promise<Task[]> {
+  //   return this.taskRepository.find();
+  // }
+
+  // async findByTeamID(teamID: string): Promise<Task[]> {
+  //   console.info('wehehehehehhe');
+  //   return await this.taskRepository.find({ where: { teamID } });
+  // }
+
+  async getTasksByTeam(teamID: string): Promise<ReadTaskDto[]> {
+    console.info('teamID', teamID);
+    const tasks: Task[] = await this.taskRepository
+      .createQueryBuilder('tasks')
+      .where('"teamID" = :teamID ', { teamID: teamID })
+      .getMany();
+
+    console.log(tasks);
+    return tasks;
   }
 
   findOne(id: string) {
