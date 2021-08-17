@@ -2,12 +2,13 @@ import {
   Entity,
   Column,
   PrimaryGeneratedColumn,
-  OneToMany,
-  PrimaryColumn,
   Generated,
+  ManyToMany,
+  JoinTable,
 } from 'typeorm';
 
 import { IsEmail } from 'class-validator';
+import { Team } from 'src/team/team.entity';
 
 @Entity()
 export class Account {
@@ -26,10 +27,6 @@ export class Account {
 
   @Column({ default: true })
   isActive: boolean;
-
-  @Column()
-  @Generated('uuid')
-  groupID: string;
   // learn about https://typeorm.io/#/relations
   // @OneToMany(type => TasksController, task => task.user)
 }

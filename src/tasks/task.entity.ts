@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryColumn } from 'typeorm';
+import { Entity, Column, PrimaryColumn, ManyToOne } from 'typeorm';
+import { Team } from 'src/team/team.entity';
 
 @Entity()
 export class Task {
@@ -17,9 +18,11 @@ export class Task {
   @Column({ default: false })
   isCompleted: boolean;
 
-  @Column({ default: null })
-  groupID: string;
+  @ManyToOne(() => Team, (team) => team.tasks, {
+    cascade: ['insert', 'update'],
+  })
+  team: Team;
 
   @Column({ default: null })
-  userID: string;
+  assignedUserID: string;
 }

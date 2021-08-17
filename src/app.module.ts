@@ -8,6 +8,8 @@ import { AccountsModule } from './accounts/accounts.module';
 import { TasksModule } from './tasks/tasks.module';
 import { Task } from './tasks/task.entity';
 import { AuthModule } from './auth/auth.module';
+import { TeamModule } from './team/team.module';
+import { Team } from './team/team.entity';
 
 @Module({
   imports: [
@@ -18,12 +20,13 @@ import { AuthModule } from './auth/auth.module';
       username: 'nathan',
       password: 'flareon',
       database: 'tata-db',
-      entities: [Account, Task],
+      entities: [Account, Task, Team],
       synchronize: false,
     }),
     AuthModule,
     AccountsModule,
     TasksModule,
+    TeamModule,
   ],
   controllers: [AppController],
   providers: [AppService],
