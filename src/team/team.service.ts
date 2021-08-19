@@ -15,9 +15,11 @@ export class TeamService {
   ) {}
   async create(createTeamDto: CreateTeamDto) {
     const { userID, ...team } = createTeamDto;
-    const foundUser = await this.accountsService.findByID(userID[0]);
-
+    console.info(createTeamDto);
+    const foundUser = await this.accountsService.findByID(userID);
+    console.info('foundUser', foundUser);
     const createdTeam = await this.teamsRepository.save(team);
+    console.info('createdTeam', createdTeam);
     const teamWithAccount = {
       ...createdTeam,
       accounts: [foundUser],
