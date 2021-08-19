@@ -9,7 +9,8 @@ import {
 } from '@nestjs/common';
 import { TeamService } from './team.service';
 import { CreateTeamDto } from './dto/create-team.dto';
-import { UpdateTeamDto } from './dto/update-team.dto';
+import { UpdateTeamDto, AddTeamMemberDto } from './dto/update-team.dto';
+import { teamProviders } from './team.providers';
 
 @Controller('team')
 export class TeamController {
@@ -18,6 +19,12 @@ export class TeamController {
   @Post()
   create(@Body() createTeamDto: CreateTeamDto) {
     return this.teamService.create(createTeamDto);
+  }
+
+  @Post('addMember')
+  addUserToTeam(@Body() addTeamMemberDto: AddTeamMemberDto) {
+    console.info(addTeamMemberDto);
+    this.teamService.addTeamMember(addTeamMemberDto);
   }
 
   @Get()

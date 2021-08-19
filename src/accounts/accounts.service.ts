@@ -50,6 +50,12 @@ export class AccountsService {
     });
   }
 
+  async findByID(id: string): Promise<Account> {
+    return await this.accountsRepository.findOne({
+      where: { id: id },
+    });
+  }
+
   async remove(id: string): Promise<void> {
     await this.accountsRepository.delete(id);
   }
