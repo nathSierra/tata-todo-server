@@ -27,6 +27,10 @@ export class Account {
 
   @Column({ default: true })
   isActive: boolean;
+
+  @ManyToMany(() => Team, (team) => team.accounts)
+  teams: Team[];
+
   // learn about https://typeorm.io/#/relations
   // @OneToMany(type => TasksController, task => task.user)
 }

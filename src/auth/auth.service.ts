@@ -31,6 +31,7 @@ export class AuthService {
   async login(user: any) {
     const payload = { username: user.username, sub: user.id };
     const foundUser = await this.usersService.findOne(user.username);
+    console.info('does have teams?', foundUser);
     return {
       accessToken: this.jwtService.sign(payload),
       user: this.cleanUser(foundUser),

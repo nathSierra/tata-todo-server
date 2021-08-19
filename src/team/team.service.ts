@@ -46,8 +46,11 @@ export class TeamService {
     return `This action returns all team`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} team`;
+  async findOne(id: string) {
+    return await this.teamsRepository.findOne({
+      where: { id: id },
+      relations: ['accounts'],
+    });
   }
 
   update(id: number, updateTeamDto: UpdateTeamDto) {

@@ -47,6 +47,7 @@ export class AccountsService {
   async findOne(username: string): Promise<Account> {
     return await this.accountsRepository.findOne({
       where: { username: username },
+      relations: ['teams'],
     });
   }
 

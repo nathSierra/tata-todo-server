@@ -17,7 +17,7 @@ export class Team {
   @Column()
   name: string;
 
-  @ManyToMany(() => Account, {
+  @ManyToMany(() => Account, (account) => account.teams, {
     cascade: true,
   })
   @JoinTable()
