@@ -38,11 +38,22 @@ export class TeamService {
     return await this.teamsRepository.save(foundTeam);
   }
 
-  async findTeamWithAccounts(id: string) {
-    return await this.teamsRepository.find({
-      where: { id: id },
-    })[0];
+  // async findTeamWithAccounts(id: string) {
+  //   return await this.teamsRepository.find({
+  //     where: { id: id },
+  //   })[0];
+  // }
+
+  async findAccountsByTeamID(teamID: string) {
+    const foundTeam = await this.teamsRepository.findOne({
+      where: { id: teamID },
+      relations: ['accounts'],
+    });
+    console.info(foundTeam);
+    return foundTeam;
   }
+
+  // async findAccountsByTeamID(teamID: string) {}
 
   findAll() {
     return `This action returns all team`;

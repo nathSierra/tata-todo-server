@@ -40,6 +40,13 @@ export class AccountsService {
     return this.accountsRepository.find();
   }
 
+  async findByTeamID(teamID: string) {
+    return await this.accountsRepository.findOne({
+      where: { teams: { id: teamID } },
+      relations: ['teams'],
+    });
+  }
+
   update(id: string, updateAccountDto: UpdateAccountDto) {
     return this.accountsRepository.save(updateAccountDto);
   }

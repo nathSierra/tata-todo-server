@@ -32,6 +32,11 @@ export class TeamController {
     return this.teamService.findAll();
   }
 
+  @Get('/accounts/:teamID')
+  findAccountsByTeamID(@Param('teamID') teamID: string) {
+    return this.teamService.findAccountsByTeamID(teamID);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.teamService.findOne(id);

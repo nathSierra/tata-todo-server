@@ -25,6 +25,12 @@ export class AccountsController {
     return this.accountsService.findAll();
   }
 
+  @Get('team/:teamID')
+  findByTeamID(@Param('teamID') teamID: string) {
+    console.info(teamID);
+    return this.accountsService.findByTeamID(teamID);
+  }
+
   @Get(':username')
   findOne(@Param('username') username: string) {
     console.info('hnm');
